@@ -2,17 +2,16 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class User {
     private int id;
     private String name;
-    private List<Book> booksLoaned;
+    final List<Book> booksLoaned;
 
     public User(int id, String name) {
-        this.id = id;
-        this.name = name;
+        setId(id);
+        setName(name);
         this.booksLoaned = new ArrayList<>(); // Inicializa uma lista vazia
     }
 
@@ -66,19 +65,12 @@ public class User {
         }
     }
 
-    public boolean returnBorrowed(Book book) {
+    public void returnBorrowed(Book book) {
         if (!booksLoaned.contains(book)) {
             System.out.println("O livro não pertence a este usuário.");
-            return false;
+            return;
         }
         book.returnBook();
         booksLoaned.remove(book);
-        return true;
-    }
-
-    public String showBorrowedBooks() {
-        return booksLoaned.isEmpty() ? "Nenhum livro emprestado." : booksLoaned.stream()
-                .map(Book::toString)
-                .collect(Collectors.joining("\n"));
     }
 }
