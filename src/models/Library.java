@@ -83,12 +83,4 @@ public class Library {
             System.out.println(book.showDetails());
         }
     }
-
-    public void showBooksAvailable() {
-        for (Book book : books) {
-            if(book.isAvailable()){
-                System.out.println(book.showDetails());
-            }
-        }
-    }
 }
